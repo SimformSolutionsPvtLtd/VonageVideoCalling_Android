@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Video Call Demo</string>
+    <string name="msg_audio_video_needed">App needs Video,Audio permissions to work properly</string>
+    <string name="msg_goto_setting_intent">App needs Video,Audio permissions to work properly. Press OK to go to setting.</string>
+    <string name="msg_session_created">Session connected successfully</string>
+    <string name="msg_session_disconnected">Session disconnected</string>
+    <string name="msg_session_error">Session Error</string>
+    <string name="msg_session_stream_received">Session stream received</string>
+    <string name="msg_firebase_init_failed">Firebase initiation failed</string>
+    <string name="msg_stream_created">Stream created successfully</string>
+    <string name="msg_stream_destroyed">Stream destroyed</string>
+    <string name="msg_publisher_error">Publisher error</string>
+    <string name="msg_call_timer">"Call time : %1$d : %2$d / 60:00 "</string>
+    <string name="notification_channel_name">Video call Demo Channel</string>
+    <string name="notification_channel_description">This channel is created by Video call demo app.</string>
+    <string name="notification_channel_id">VideoCall_1.0</string>
+    <string name="title_error_dialog">Error</string>
+    <string name="title_permission_dialog">Permission</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_deny">Deny</string>
+    <string name="msg_join">Join</string>
+    <string name="msg_call_end">Call End</string>
+</resources>
