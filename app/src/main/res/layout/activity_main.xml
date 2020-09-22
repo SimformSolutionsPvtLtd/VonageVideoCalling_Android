@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.simform.videocalldemo.videocall.activity.MainActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".videocall.activity.MainActivity">
+
+        <FrameLayout
+            android:id="@+id/frame_layout_subscriber_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/frame_layout_publisher_container"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:background="@drawable/shape_publisher_view"
+            android:layout_marginBottom="120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            android:id="@+id/text_call_timer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:background="@drawable/shape_call_timer_textview"
+            app:timer_text="@{activity.callTime}"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/button_mute_audio"
+            app:layout_constraintEnd_toEndOf="@id/button_video_off"
+            app:layout_constraintBottom_toTopOf="@id/button_call_end"
+            android:layout_marginBottom="32dp"
+            android:padding="8dp"
+            android:textStyle="bold"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_mute_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_call_end"
+            app:layout_constraintBottom_toBottomOf="@id/button_call_end"
+            app:layout_constraintTop_toTopOf="@id/button_call_end"
+            android:backgroundTint="@android:color/black"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{activity::onClickImpl}"
+            android:src="@drawable/ic_outline_mic_none_24"
+            app:borderWidth="0dp"
+            app:fabSize="mini"
+            app:layout_constraintHorizontal_chainStyle="packed"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_call_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_red_light"
+            app:borderWidth="0dp"
+            android:clickable="true"
+            app:fabSize="normal"
+            android:focusable="true"
+            app:layout_constraintStart_toEndOf="@id/button_mute_audio"
+            app:layout_constraintEnd_toStartOf="@id/button_video_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:onClick="@{activity::onClickImpl}"
+            android:src="@drawable/ic_outline_call_end_24"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_video_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/button_call_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/button_call_end"
+            app:layout_constraintTop_toTopOf="@id/button_call_end"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:backgroundTint="@android:color/black"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{activity::onClickImpl}"
+            android:src="@drawable/ic_outline_videocam_24"
+            app:borderWidth="0dp"
+            app:fabSize="mini"
+           />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
