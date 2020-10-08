@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+          <variable
+              name="activity"
+              type="com.simform.videocalldemo.videocall.activity.IncomingCallScreenActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".videocall.activity.IncomingCallScreenActivity"
+        >
+        <TextView
+            android:id="@+id/text_caller_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.2"
+            android:text="@{activity.name}"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            />
+           <TextView
+               android:id="@+id/text_rating"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:drawableStartCompat="@drawable/ic_baseline_star_24"
+               android:drawablePadding="4dp"
+               app:layout_constraintStart_toStartOf="@id/text_caller_name"
+               app:layout_constraintEnd_toEndOf="@id/text_caller_name"
+               app:layout_constraintTop_toBottomOf="@id/text_caller_name"
+               android:layout_marginTop="8dp"
+               android:text="@{activity.rating}"
+               android:textColor="@android:color/black"
+               android:textSize="18sp"
+               />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_answer_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_green_dark"
+            app:borderWidth="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:fabSize="normal"
+            android:src="@drawable/ic_outline_call_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_decline_call"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            android:layout_marginBottom="50dp"
+            android:onClick="@{activity::onclick}"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_decline_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_red_light"
+            app:borderWidth="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:fabSize="normal"
+            android:src="@drawable/ic_outline_call_end_24"
+            app:layout_constraintTop_toTopOf="@id/button_answer_call"
+            app:layout_constraintStart_toEndOf="@id/button_answer_call"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/button_answer_call"
+            android:onClick="@{activity::onclick}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
