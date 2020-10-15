@@ -32,14 +32,13 @@ import com.simform.videocalldemo.databinding.ActivityMainBinding
 import com.simform.videocalldemo.utils.DialogUtils
 import com.simform.videocalldemo.utils.PermissionUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.iid.FirebaseInstanceId
 import com.opentok.android.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
 class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Session.SessionListener,
-        View.OnTouchListener {
+    View.OnTouchListener {
     private var mSession: Session? = null
     private var mPublisher: Publisher? = null
     private var mSubscriber: Subscriber? = null
@@ -58,10 +57,10 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
-                DataBindingUtil.setContentView(this, R.layout.activity_main)
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
         binding.activity = this
-        firebaseInit()
+
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel()
@@ -77,22 +76,22 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
     }
 
     override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             RC_VIDEO_PERM -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[1] == PackageManager.PERMISSION_GRANTED
+                    grantResults[1] == PackageManager.PERMISSION_GRANTED
                 ) {
                     createSession()
                 } else {
                     if (PermissionUtils.canShowMessage(
-                                    perms[0],
-                                    this
-                            ) || PermissionUtils.canShowMessage(perms[1], this)
+                            perms[0],
+                            this
+                        ) || PermissionUtils.canShowMessage(perms[1], this)
                     ) {
                         AlertDialog.Builder(this).apply {
                             setMessage(getString(R.string.msg_audio_video_needed))
@@ -130,9 +129,9 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
 
     private fun requestPermission() {
         if (PermissionUtils.checkHasPermission(
-                        perms[0],
-                        this
-                ) && PermissionUtils.checkHasPermission(perms[1], this)
+                perms[0],
+                this
+            ) && PermissionUtils.checkHasPermission(perms[1], this)
         ) {
             createSession()
         } else {
@@ -154,7 +153,7 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
     override fun onError(publisherKit: PublisherKit?, opentokError: OpentokError?) {
         Log.i(LOG_TAG, getString(R.string.msg_publisher_error) + " " + { opentokError?.message })
         DialogUtils.showDialog(this, opentokError?.message!!,
-                DialogInterface.OnClickListener { dialogInterface, _ -> dialogInterface.dismiss() })
+            DialogInterface.OnClickListener { dialogInterface, _ -> dialogInterface.dismiss() })
     }
 
     override fun onStreamDestroyed(publisherKit: PublisherKit?, stream: Stream?) {
@@ -171,9 +170,9 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
     companion object {
         const val RC_VIDEO_PERM = 1
         val perms = arrayOf(
-                Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.INTERNET
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.INTERNET
         )
         const val SESSION_ID = BuildConfig.SESSION_ID
         const val TOKEN = BuildConfig.TOKEN
@@ -203,19 +202,19 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
                 Toast.makeText(this, audioEnabled.toString(), Toast.LENGTH_LONG).show()
                 if (audioEnabled) {
                     (view as FloatingActionButton).setImageDrawable(
-                            ContextCompat.getDrawable(
-                                    this,
-                                    R.drawable.ic_outline_mic_off_24
-                            )
+                        ContextCompat.getDrawable(
+                            this,
+                            R.drawable.ic_outline_mic_off_24
+                        )
                     )
                     audioEnabled = false
                     mPublisher?.publishAudio = false
                 } else {
                     (view as FloatingActionButton).setImageDrawable(
-                            ContextCompat.getDrawable(
-                                    this,
-                                    R.drawable.ic_outline_mic_none_24
-                            )
+                        ContextCompat.getDrawable(
+                            this,
+                            R.drawable.ic_outline_mic_none_24
+                        )
                     )
                     audioEnabled = true
                     mPublisher?.publishAudio = true
@@ -225,20 +224,20 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
                 Toast.makeText(this, videoEnabled.toString(), Toast.LENGTH_LONG).show()
                 if (videoEnabled) {
                     (view as FloatingActionButton).setImageDrawable(
-                            ContextCompat.getDrawable(
-                                    this,
-                                    R.drawable.ic_outline_videocam_off_24
-                            )
+                        ContextCompat.getDrawable(
+                            this,
+                            R.drawable.ic_outline_videocam_off_24
+                        )
                     )
                     videoEnabled = false
                     mPublisher?.publishVideo = false
                     frame_layout_publisher_container.visibility = View.GONE
                 } else {
                     (view as FloatingActionButton).setImageDrawable(
-                            ContextCompat.getDrawable(
-                                    this,
-                                    R.drawable.ic_outline_videocam_24
-                            )
+                        ContextCompat.getDrawable(
+                            this,
+                            R.drawable.ic_outline_videocam_24
+                        )
                     )
                     videoEnabled = true
                     mPublisher?.publishVideo = true
@@ -257,8 +256,8 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
 
     @SuppressLint("RestrictedApi")
     override fun onPictureInPictureModeChanged(
-            isInPictureInPictureMode: Boolean,
-            newConfig: Configuration?
+        isInPictureInPictureMode: Boolean,
+        newConfig: Configuration?
     ) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
         if (isInPictureInPictureMode) {
@@ -275,8 +274,8 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
         mPublisher = Publisher.Builder(this@MainActivity).build()
         mPublisher?.setPublisherListener(this@MainActivity)
         mPublisher?.renderer?.setStyle(
-                BaseVideoRenderer.STYLE_VIDEO_SCALE,
-                BaseVideoRenderer.STYLE_VIDEO_FILL
+            BaseVideoRenderer.STYLE_VIDEO_SCALE,
+            BaseVideoRenderer.STYLE_VIDEO_FILL
         )
         frame_layout_publisher_container.addView(mPublisher?.view)
         if (mPublisher?.view is GLSurfaceView) {
@@ -292,10 +291,10 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
     override fun onError(session: Session?, opentokError: OpentokError?) {
         Log.i(LOG_TAG, getString(R.string.msg_session_error) + " " + opentokError?.message)
         DialogUtils.showDialog(this, opentokError?.message!!,
-                DialogInterface.OnClickListener { dialogInterface, _ ->
-                    dialogInterface.dismiss()
-                    finish()
-                })
+            DialogInterface.OnClickListener { dialogInterface, _ ->
+                dialogInterface.dismiss()
+                finish()
+            })
     }
 
     override fun onStreamDropped(session: Session?, stream: Stream?) {
@@ -313,8 +312,8 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
             startTime = System.currentTimeMillis()
             startTimer()
             mSubscriber?.renderer?.setStyle(
-                    BaseVideoRenderer.STYLE_VIDEO_SCALE,
-                    BaseVideoRenderer.STYLE_VIDEO_FILL
+                BaseVideoRenderer.STYLE_VIDEO_SCALE,
+                BaseVideoRenderer.STYLE_VIDEO_FILL
             )
             frame_layout_subscriber_container.addView(mSubscriber?.view)
             connectionHasUserTimer?.cancel()
@@ -341,22 +340,14 @@ class MainActivity : AppCompatActivity(), PublisherKit.PublisherListener, Sessio
     @RequiresApi(Build.VERSION_CODES.O)
     fun createNotificationChannel() {
         val channel = NotificationChannel(
-                getString(R.string.notification_channel_id),
-                getString(R.string.notification_channel_name), NotificationManager.IMPORTANCE_HIGH
+            getString(R.string.notification_channel_id),
+            getString(R.string.notification_channel_name), NotificationManager.IMPORTANCE_HIGH
         ).apply {
             description = getString(R.string.notification_channel_description)
         }
         val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
-    }
-
-    private fun firebaseInit() {
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
-            if (!it.isSuccessful) {
-                Log.i(LOG_TAG, getString(R.string.msg_firebase_init_failed))
-            }
-        }
     }
 
     private fun showCallUI() {
