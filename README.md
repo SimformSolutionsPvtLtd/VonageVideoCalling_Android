@@ -5,7 +5,7 @@
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 
 
-### This applications is provide 1-to-1 video calls with using <a href="https://tokbox.com/developer/sdks/android/">Vonage Video API Android SDK</a> ###
+### This applications is provide one to one video calls with using <a href="https://tokbox.com/developer/sdks/android/">Vonage Video API Android SDK</a> ###
 
 ![](ezgif.com-gif-maker.gif)
 
